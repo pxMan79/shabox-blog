@@ -1,0 +1,119 @@
+/* ========================================= */
+/* 昼夜交替的“光影代词”（CSS 变量） */
+/* ========================================= */
+
+/* 1. 默认状态：白天模式（你原本极其充满生机的配色） */
+:root {
+  --bg-main: #c0ebff;            /* 晴空蓝的主背景 */
+  --bg-card: #e8f6ff;            /* 卡片的浅灰白 */
+  --text-main: #333333;          /* 正文深黑色 */
+  --text-muted: #999999;         /* 辅助文字浅灰色 */
+  --border-color: #e0e0e0;       /* 边框颜色 */
+  --card-shadow: rgba(0, 0, 0, 0.05); /* 白天轻盈的阴影 */
+  --article-bg: cornsilk;        /* 阅读区的书卷黄 */
+  --article-shadow: #e5e2c8;      /* 白天：温柔的米黄色实体阴影 */
+  --poem-bg: rgba(0, 0, 0, 0.02); /* 白天：极浅的宣纸灰底色 */
+  --inline-code-bg: rgba(0, 0, 0, 0.05); /* 白天：单行代码浅灰底 */
+  --inline-code-color: #d14;      /* 白天：单行代码经典的暗红色 */
+}
+
+/* 2. 触发状态：黑夜模式（属于 ShaBox 的深邃月光） */
+/* 当网页的 <html> 标签被挂上 .dark 名字时，所有变量瞬间变身！ */
+html.dark {
+  --bg-main: #0f172a;            /* 深邃的夜空蓝 */
+  --bg-card: #1e293b;            /* 磨砂夜岩（带点蓝的深灰色卡片） */
+  --text-main: #cbd5e1;          /* 月光银灰（护眼正文） */
+  --text-muted: #64748b;         /* 暗夜灰蓝（辅助文字） */
+  --border-color: #334155;       /* 暗色边框 */
+  --card-shadow: rgba(0, 0, 0, 0.4);  /* 黑夜里极其深邃的阴影 */
+  --article-bg: #2a2723;         /* 暗哑羊皮纸 */
+   --article-shadow: #080c17;      /* 黑夜：比夜空蓝更深邃的极暗实体阴影 */
+  --poem-bg: rgba(255, 255, 255, 0.03); /* 黑夜：微微发光的宣纸底色 */
+  --inline-code-bg: rgba(255, 255, 255, 0.1); /* 黑夜：单行代码暗灰底 */
+  --inline-code-color: #ff9eb0;   /* 黑夜：单行代码变成柔和的樱花粉，护眼且极客 */
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  /* 极其重要的一步：让换肤过程拥有 0.4 秒的丝滑渐变，而不是生硬地闪烁！ */
+  transition: background-color 0.4s ease, color 0.4s ease;
+   /* 👇 终极防御：抹杀一切横向滚动条，任何试图撑爆屏幕的元素都会被无情裁剪 */
+  overflow-x: hidden;
+  width: 100%;
+}
+/* 顺手把 Vue 挂载的根节点也锁死 */
+#app {
+  overflow-x: hidden;
+  width: 100%;
+}
+/* ========================================= */
+/* 全局版心容器 (Container) */
+/* ========================================= */
+.inner {
+  width: 96%;
+  margin: 0 auto; /* 绝对居中 */
+  padding: 0 0 20px 0; /* 统一下拉和触底的呼吸空间 */
+}
+
+
+/* SEO 专属隐身斗篷（行业标准写法） */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ========================================= */
+/* 网页滚动条美化魔法 (Webkit 内核：Chrome, Edge, Safari) */
+/* ========================================= */
+
+/* 1. 决定滚动条的整体胖瘦 */
+::-webkit-scrollbar {
+  width: 8px;  /* 竖向滚动条的宽度，8px 是极其精致的粗细 */
+  height: 8px; /* 横向滚动条的高度（比如你的代码块太长出现横向滚动时） */
+}
+
+/* 2. 滚动条的滑道（背景） */
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.03); /* 极浅的底色，像一条若有若无的冰轨 */
+  border-radius: 4px;
+}
+
+/* 3. 滚动条的滑块（你鼠标拖动的那个东西） */
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15); /* 默认是一个非常温柔的浅灰色 */
+  border-radius: 4px; /* 圆润的边角，告别死板的直角 */
+}
+
+/* 4. 当鼠标悬停在滚动条上时的华丽变身 */
+::-webkit-scrollbar-thumb:hover {
+  background: #56ab2f; /* 魔法：瞬间变成你导航栏的那抹充满生命力的主题绿！ */
+}
+
+/* ========================================= */
+/* 兼容火狐浏览器 (Firefox 的现代标准写法) */
+/* ========================================= */
+* {
+  scrollbar-width: thin; /* 变细 */
+  scrollbar-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.03); /* 滑块颜色 滑道颜色 */
+}
+
+/* 把属于卡片外壳的公用样式搬到这里来 */
+.side-card {
+  /* 魔法 1：呼叫变量代词 */
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  box-shadow: 0 2px 8px var(--card-shadow);
+
+  border-radius: 10px;
+  overflow: hidden;
+
+  /* 魔法 2：极其重要的丝滑过渡！让卡片跟着背景一起慢慢变暗，而不是生硬地闪烁 */
+  transition: background-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+}

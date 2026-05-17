@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <!-- 字符编码 -->
+    <meta charset="UTF-8" />
+    <!-- 移动端适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 手机浏览器的顶部状态栏优化 -->
+    <meta name="theme-color" content="#0f172a" />
+    <!-- 页签图标 -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <!-- 图标IE兼容 -->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <!-- 网页标题 -->
+    <title>ShaBox | 像素人柒玖的封盒日记</title>
+    <!-- SEO 描述 -->
+    <meta
+      name="description"
+      content="像素人的个人博客，前端、绘画、数码与日常分享的沙盒。"
+    />
+    <!-- SEO 核心关键词 -->
+    <meta
+      name="keywords"
+      content="像素人, ShaBox, 个人博客, 前端, 随笔, 封盒日记"
+    />
+    <!-- 渲染读取基础样式 -->
+    <script>
+      (function () {
+        const savedTheme = localStorage.getItem("theme");
+        // 反转 新用户默认黑夜模式
+        if (savedTheme !== "light") {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

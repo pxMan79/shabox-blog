@@ -1,0 +1,60 @@
+/* 1.元素宽高计算 */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2.移除内外边距 */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 3.支持平滑滚动 设置基础行高 */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif; /* 使用舒服的系统默认字体 */
+}
+
+/* 4.清除列表/下划线 */
+ul,
+ol {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 5.多媒体宽度限制 */
+img,
+picture,
+video,
+canvas,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+/* 6.表单字体继承 */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  outline: none;
+}
+
+/* 7.兼容表现 */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}

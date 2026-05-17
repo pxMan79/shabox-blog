@@ -1,0 +1,6 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+
+# 告诉爬虫你的站点地图在哪里（请把 shabox.fun 替换为你真实的域名）
+Sitemap: https://shabox.fun/sitemap.xml
