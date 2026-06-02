@@ -8,6 +8,7 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment: server
 
     steps:
       - name: Checkout
@@ -25,15 +26,23 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Deploy to server
-        uses: easingthemes/ssh-deploy@v5
+      - name: Deploy static files to server
+        uses: appleboy/scp-action@v0.1.7
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_KEY }}
-          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
-          REMOTE_USER: ${{ secrets.SERVER_USER }}
-          TARGET: /opt/projects/shabox-blog/dist/
-          SOURCE: dist/
-          EXCLUDE: ".git/,node_modules/"
-          SCRIPT_AFTER: |
-            docker restart shabox-blog
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          source: "dist/*"
+          target: "/opt/projects/shabox-blog"
+          strip_components: 0
+          
+      - name: Reload Nginx container
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_KEY }}
+          script: |
+            set -e
+            docker exec shabox-blog nginx -s reload
             echo "Deploy complete: $(date '+%Y-%m-%d %H:%M:%S')"
